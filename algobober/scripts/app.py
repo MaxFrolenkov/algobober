@@ -14,7 +14,7 @@ class App():
         #self.image = pygame.image.load(os.path.join('assets','images','background.png'))
         #pygame.display.set_icon(image)
     def update(self):
-        pass
+        self.game.update_objects()
     def run(self):
         while self.runn:
             self.handle_events()
@@ -27,6 +27,10 @@ class App():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.runn = False
+            elif event.type == pygame.KEYDOWN:
+                self.game.process_key_down_event(event.key)
+            elif event.type == pygame.KEYUP:
+                self.game.process_key_up_event(event.key)
     def render(self):
         self.displ.fill((0,0,0))
         self.game.render_objects(self.displ)
